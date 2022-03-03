@@ -61,9 +61,5 @@ def find_2_item(data, one_item, min_sup=3000):
 
 
 
-'''
-def apriori(data, min_sup=2000):
-    one_item=find_1_item(data, min_sup)
-'''
 
 
