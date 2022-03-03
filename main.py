@@ -54,10 +54,14 @@ def main():
     sim.ordinal(data, 4, 5, ' education')
     
     '''
-
+    '''
     one_item=ap.find_1_item(data)
     count=ap.find_2_item(data, one_item)
-    
+    '''
+    l=[{1,2}, {1,3}, {1,5}, {2, 3}, {2, 4}, {2, 5}]
+    C_k=ap.apriori_gen(l, 3)
+    print(C_k)
+   
    
     
 

@@ -1,25 +1,57 @@
 import collections as col
 
 features=[' workclass', ' marital-status', ' occupation', ' relationship', ' race', ' sex', ' native-country', ' education']
+MIN_SUP=3000
 
-def find_1_item(data, min_sup=3000):
+class Itemsets:
+
+    def __init__(self, k):
+        self.k=k
+        self.freq_items=[]
+        
+    
+
+def find_1_item(data):
     count=[]
+    l1=[{x} for x in range(8)]
     for f in features:
         c=col.Counter(data[f])
         dic=dict(c)
-        dic={frozenset([key]):val for key, val in dic.items() if val>= min_sup and key!=' ?'}
+        dic={frozenset([key]):val for key, val in dic.items() if val>= MIN_SUP and key!=' ?'}
         count.append(dic)
-    return count
+    return count, l1
+
+def apriori(data):
+    result=[]
 
 
 def apriori_gen(l, k):
     # l is L_K-1 
-    l_copy=l
+    C_k=[]
     for i in range(len(l)):
         item1=l[i]
         for j in range(i+1, len(l)):
+            item1_lst=list(item1)
             item2=l[j]
-            if list(item1)[:k-1] == list(item2)[:k-1] and 
+            item2_lst=list(item2)
+            if item1_lst[:k-2] == item2_lst[:k-2] and item1_lst[-1]<item2_lst[-1]:
+                item1_lst.append(item2_lst[-1])
+                c=set(item1_lst)
+                if not has_infrequent_subset(l, c):
+                    C_k.append(c)
+    return C_k
+                
+
+
+def has_infrequent_subset(l, c):
+    c_lst=list(c)
+    for i in range(len(c_lst)):
+        c_copy=c_lst.copy()
+        c_copy.pop(i)
+        temp=set(c_copy)
+        if temp not in l:
+            return True
+    return False
 
             
 
