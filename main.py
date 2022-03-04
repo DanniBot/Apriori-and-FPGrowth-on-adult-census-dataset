@@ -1,20 +1,46 @@
 import pandas as pd
 import configuration as config
-import itemset as it
+import Apriori as ap
     
 
 def main():
     data =  pd.read_csv(config.FILE, sep=",")
     
-    '''
-    one_item=ap.find_1_item(data)
-    count=ap.find_2_item(data, one_item)
-    '''
-    itemsets1=it.Itemsets(1, data)
-    print(itemsets1.freq_items)
-    print(itemsets1.l)
-    itemsets2=it.Itemsets(2, l_prev=itemsets1.l)
-    print(itemsets2.l)
+    itemsets1=ap.Itemsets(1)
+    itemsets1.apriori(data)
+    print(itemsets1)
+    
+    itemsets2=ap.Itemsets(2)
+    itemsets2.apriori(data, itemsets1)
+    print(itemsets2)
+
+    itemsets3=ap.Itemsets(3)
+    itemsets3.apriori(data, itemsets2)
+    print(itemsets3)
+
+    itemsets4=ap.Itemsets(4)
+    itemsets4.apriori(data, itemsets3)
+    print(itemsets4)
+
+    itemsets5=ap.Itemsets(5)
+    itemsets5.apriori(data, itemsets4)
+    print(itemsets5)
+
+    itemsets6=ap.Itemsets(6)
+    itemsets6.apriori(data, itemsets5)
+    print(itemsets6)
+
+    itemsets7=ap.Itemsets(7)
+    itemsets7.apriori(data, itemsets6)
+    print(itemsets7)
+
+    itemsets8=ap.Itemsets(8)
+    itemsets8.apriori(data, itemsets7)
+    print(itemsets8)
+
+
+    
+
    
    
     
