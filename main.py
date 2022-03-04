@@ -1,10 +1,10 @@
 import pandas as pd
-import configuration as config
 import Apriori as ap
     
+FILE = "./adult/adult.data"
 
 def main():
-    data =  pd.read_csv(config.FILE, sep=",")
+    data =  pd.read_csv(FILE, sep=",")
     
     itemsets1=ap.Itemsets(1)
     itemsets1.apriori(data)
