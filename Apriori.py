@@ -14,9 +14,7 @@ class Itemsets(object):
     def __str__(self):
         if not self.freq_items and not self.l_k:
             return f'frequent {self.k}-itemsets\nfrequent {self.k}-itemsets is null'
-        return f'''{self.k}-itemsets\n
-                    candidate {self.k}-itemsets is {self.l_k}\n
-                    frequent {self.k}-itemset is {self.freq_items}\n'''
+        return f'''{self.k}-itemsets\ncandidate {self.k}-itemsets is {self.l_k}\nfrequent {self.k}-itemset is {self.freq_items}\n'''
     
     __repr__ = __str__
 

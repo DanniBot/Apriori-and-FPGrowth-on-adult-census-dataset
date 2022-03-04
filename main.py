@@ -1,11 +1,16 @@
 import pandas as pd
 import Apriori as ap
+import FPGrowth as fp
     
 FILE = "./adult/adult.data"
+
+features=[' workclass', ' marital-status', ' occupation', ' relationship', ' race', ' sex', ' native-country', ' education']
+MIN_SUP=2000
 
 def main():
     data =  pd.read_csv(FILE, sep=",")
     
+    '''
     itemsets1=ap.Itemsets(1)
     itemsets1.apriori(data)
     print(itemsets1)
@@ -37,7 +42,11 @@ def main():
     itemsets8=ap.Itemsets(8)
     itemsets8.apriori(data, itemsets7)
     print(itemsets8)
-
+    '''
+    
+    dic={1:2, 2:3}
+    for i in dic:
+        print(i)
 
     
 
