@@ -49,8 +49,12 @@ def main():
 
     root=fp.createTree(header, data)
 
-    all_path=fp.findPath(header, root)
-    print(all_path)
+    cond_PB=fp.findPath(header, root)
+    dic=fp.findCondFP(cond_PB)
+
+    result=fp.find_freq(dic, header)
+
+    print(result)
 
    
    

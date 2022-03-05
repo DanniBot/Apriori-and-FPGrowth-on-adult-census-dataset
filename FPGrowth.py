@@ -81,6 +81,65 @@ def findPath(header, root):
         dic[key]=all_path
     return dic
 
+def findCondFP(CondPB):
+    header_dic={}
+    for key, val in CondPB.items():
+        dic={}
+        for path in val:
+            if path[0]:
+                one_condfp=dic.get(path[0][0],{})
+                for item in path[0]:
+                    one_condfp[item]=one_condfp.get(item,0)+path[1]
+                dic[path[0][0]]=one_condfp
+        header_dic[key]=dic
+    
+
+    for i, dic in header_dic.items():
+        for key in dic:
+            single_item=dic[key]
+            single_item={item:val for item, val in single_item.items() if val>= MIN_SUP}
+            dic[key]=single_item
+
+        one_condfp=dic
+        one_condfp={item:val for item, val in one_condfp.items() if len(val)!=0}
+        header_dic[i]=one_condfp
+
+    header_dic={item:val for item, val in header_dic.items() if len(val)!=0}
+
+
+    return header_dic
+
+
+def allSubsets(s):
+    if len(s) == 0 :
+        return [[]]
+    return allSubsets(s[1:]) + [[s[0]] + r for r in allSubsets(s[1:])]
+
+
+def find_freq(condFP,header):
+    result={}
+    for item, itemsets in condFP.items():
+        dic={}
+        for i in itemsets.values():
+            for key, val in i.items():
+                dic[key]=dic.get(key,0)+val
+        sets=tuple(x for x in dic)
+        subsets=allSubsets(sets)
+        #subsets=[s.append(item) for s in subsets if len(s)>0]
+        for freq_sets in subsets:
+            if freq_sets:
+                count=header[item][0]
+                for single_item in freq_sets:
+                    if dic[single_item]<count:
+                        count=dic[single_item]
+                freq_sets.append(item)
+                result[frozenset(freq_sets)]=count
+    return result
+
+
+
+    
+
 
     
 
