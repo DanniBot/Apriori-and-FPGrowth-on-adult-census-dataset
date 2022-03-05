@@ -44,11 +44,13 @@ def main():
     print(itemsets8)
     '''
     
-    dic={1:2, 2:3}
-    for i in dic:
-        print(i)
+    header=fp.createHeader(data)
 
-    
+
+    root=fp.createTree(header, data)
+
+    all_path=fp.findPath(header, root)
+    print(all_path)
 
    
    
